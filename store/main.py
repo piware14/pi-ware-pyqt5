@@ -34,7 +34,7 @@ def featuredTab(parent):
 
      browser = QWebView(widget)
      browser.showMaximized()
-     browser.setUrl(QUrl("http://pi-ware-telementry.ml/widget-2/"))
+     browser.setUrl(QUrl("http://pi-ware-telemetry.ml/widget-2/"))
      layout.addWidget(browser)
      widget.setLayout(layout)
 
