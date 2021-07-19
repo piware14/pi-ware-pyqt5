@@ -1,6 +1,6 @@
 <div align='center'>
 <img src='./icons/logo-full.png' width='128px'> 
-<h1>Pi-Ware</h1>
+<h1>This is the PyQt5 rerwite of Pi-Ware by leha-code</h1>
 Pi-Ware is an app store inspired by Botspots <a href="https://github.com/Botspot/pi-apps">pi-apps</a> for the Raspberry Pi that allows you to install apps that you generally can't get from the official repos and/or without an extra amount of work.
   
 # NEW:
@@ -33,7 +33,7 @@ To learn more vist our <a href="https://github.com/piware14/pi-ware/wiki/new-stu
 
 ## Install Pi-Ware
 ```sh
-git clone https://github.com/piware14/pi-ware.git
+git clone https://github.com/piware14/pi-ware-pyqt5.git
 cd pi-ware
 bash install
 ```
