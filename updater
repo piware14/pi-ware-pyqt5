@@ -16,7 +16,7 @@ fi
 
 #Variables
 PW_PREFIX="$HOME/.local/share"
-PW_REPO="https://github.com/piware14/pi-ware.git"
+PW_REPO="https://github.com/piware14/pi-ware-pyqt5.git"
 LAST_COMMIT="$(git ls-remote "$PW_REPO" | grep refs/heads/main | cut -f 1)"
 
 #Main
