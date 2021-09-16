@@ -34,7 +34,7 @@ def istherefile(file): # This Function checks whether a file exists
         return True
 
 #Check if dev files exist
-if not istherefile(f"/home/{username}/pi-ware-pyqt5/.dev"):
+if istherefile(f"/home/{username}/pi-ware-pyqt5/.dev"):
     IsDev = "False"
 else:
     IsDev = "True"
