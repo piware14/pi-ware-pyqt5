@@ -1,14 +1,14 @@
 {
-  "APTCleaner" : "all",
-  "CryApp" : "armhf",
-  "Deltarune" : "armhf",
-  "Discord" : "armhf",
-  "Doom" : "armhf" ,
-  "FireFox" : "all" ,
-  "Godot Engine" : "armhf",
-  "Lunar Client" : "armhf",
-  "MCPI (Modded)" : "all",
-  "Mari0" : "armhf",
-  "Orthobot" : "armhf",
-  "PyEncrypter" : "all"
+  "APTCleaner": "all",
+  "CryApp": "armhf",
+  "Deltarune": "armhf",
+  "Discord": "armhf",
+  "Doom": "armhf" ,
+  "FireFox": "all" ,
+  "Godot Engine": "armhf",
+  "Lunar Client": "armhf",
+  "MCPI (Modded)": "all",
+  "Mari0": "armhf",
+  "Orthobot": "armhf",
+  "PyEncrypter": "all"
 }
