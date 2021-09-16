@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+#Pi-Ware text editor
 
 import sys
 from PyQt5.QtWidgets import QWidget, QApplication, QVBoxLayout, QHBoxLayout
@@ -9,15 +10,13 @@ from PyQt5 import Qt
 class Window(QWidget):
     def __init__(self):
         super().__init__()
-
         self.file_path = None
-
+        #Open file sortcut
         self.open_new_file_shortcut = QShortcut(QKeySequence('Ctrl+O'), self)
         self.open_new_file_shortcut.activated.connect(self.open_new_file)
-
+        #Save file shortcut
         self.save_current_file_shortcut = QShortcut(QKeySequence('Ctrl+S'), self)
         self.save_current_file_shortcut.activated.connect(self.save_current_file)
-
         vbox = QVBoxLayout()
         text = "Untitled File"
         self.title = QLabel(text)
@@ -26,13 +25,11 @@ class Window(QWidget):
         vbox.addWidget(self.title)
         self.setLayout(vbox)
         self.setWindowTitle("Pi-Ware Text editor")
-
         self.scrollable_text_area = QTextEdit()
         vbox.addWidget(self.scrollable_text_area)
 
     def open_new_file(self):
-        self.file_path, filter_type = QFileDialog.getOpenFileName(self, "Open new file",
-                "", "All files (*)")
+        self.file_path, filter_type = QFileDialog.getOpenFileName(self, "Open new file", "", "All files (*)")
         if self.file_path:
             with open(self.file_path, "r") as f:
                 file_contents = f.read()
@@ -43,8 +40,7 @@ class Window(QWidget):
 
     def save_current_file(self):
         if not self.file_path:
-            new_file_path, filter_type = QFileDialog.getSaveFileName(self, "Save this file
-                        as...", "", "All files (*)")
+            new_file_path, filter_type = QFileDialog.getSaveFileName(self, "Save this file as...", "", "All files (*)")
             if new_file_path:
                 self.file_path = new_file_path
             else:
@@ -58,11 +54,8 @@ class Window(QWidget):
     def closeEvent(self, event):
         messageBox = QMessageBox()
         title = "Quit Application?"
-        message = "WARNING !!\n\nIf you quit without saving, any changes made to the file
-                will be lost.\n\nSave file before quitting?"
-       
-        reply = messageBox.question(self, title, message, messageBox.Yes | messageBox.No |
-                messageBox.Cancel, messageBox.Cancel)
+        message = "WARNING !!\n\nIf you quit without saving, any changes made to the file will be lost.\n\nSave file before quitting?"
+        reply = messageBox.question(self, title, message, messageBox.Yes | messageBox.No | messageBox.Cancel, messageBox.Cancel)
         if reply == messageBox.Yes:
             return_value = self.save_current_file()
             if return_value == False:
@@ -75,8 +68,7 @@ class Window(QWidget):
     def invalid_path_alert_message(self):
         messageBox = QMessageBox()
         messageBox.setWindowTitle("Invalid file")
-        messageBox.setText("Selected filename or path is not valid. Please select a
-                valid file.")
+        messageBox.setText("Selected filename or path is not valid. Please select a valid file.")
         messageBox.exec()
 
 if __name__ == '__main__':
