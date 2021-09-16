@@ -40,11 +40,11 @@ else:
     IsDev = "False"
 
 #Check if apps.json exists
-if not istherefile(f"/home/{username}/pi-ware/apps/apps.json"):
+if not istherefile(f"/home/{username}/pi-ware-pyqt5/apps/apps.json"):
     error("critical", "Apps.json not found!", True)
 else:
      #Read apps.json
-     with open(f"/home/{username}/pi-ware/apps/apps.json") as f:
+     with open(f"/home/{username}/pi-ware-pyqt5/apps/apps.json") as f:
        archdata = json.load(f)
 
 def featuredTab(parent):
