@@ -1,55 +1,37 @@
 #!/bin/bash
 
-#load functions
-source "$HOME/pi-ware/func/api" || echo "failed to source $HOME/pi-ware/func/api"
+#load functions and variables
+source "$HOME/pi-ware-pyqt5/func/api" || echo "failed to source $HOME/pi-ware-pyqt5/func/api"
 
 #Check if connected to internet
-wget -q --spider http://google.com
+while [[ "$(wget -q --spider http://google.com)" -eq 1 ]]
+do
+  echo "I couldn't detect an internet connection! Trying again..."
+  sleep 2
+done
 
-if [ $? -eq 0 ]; then
-    #User online
-    internet="1"
-else
-    #User offline
-    internet="0"
-fi
-
-#Variables
-PW_PREFIX="$HOME/.local/share"
-PW_REPO="https://github.com/piware14/pi-ware-pyqt5.git"
-LAST_COMMIT="$(git ls-remote "$PW_REPO" | grep refs/heads/main | cut -f 1)"
-
-#Main
-if [ "$internet" == "1" ]; then
-  if [ "$(cat "$PW_PREFIX/pi-ware/version")" != "$LAST_COMMIT" ] || [ "$1" == force ]; then
-    if [ "$1" == force ]; then
-      echo "Force updating pi-ware"
-    else
-      echo "Updating Pi-Ware..."
-    fi
-    cd $HOME/pi-ware
-    #Revert to clone
-    rm -rf $HOME/pi-ware/
-    #git pull
-    cd $PW_PREFIX/pi-ware
-    git clone "$PW_REPO" $HOME/pi-ware
-    rm -rf $PW_PREFIX/pi-ware/version
-    cd $HOME/pi-ware
-    echo $(git rev-parse main) > "$PW_PREFIX/pi-ware/version"
-    bash install
-    cd $HOME
-    sed -i -e 's/\r$//' $HOME/pi-ware/apps/MCPI_Modded/install
-    sed -i -e 's/\r$//' $HOME/pi-ware/apps/MCPI_Modded/uninstall
-    echo "Update complete, Closing in 5 seconds..."
-    sleep 5
-    exit 0
+#If loop ends, User online
+#Check for updates
+echo "Checking for updates..."
+if [ "$(cat $PW_PREFIX/share/pi-ware-pyqt5/version)" != "$LAST_COMMIT" ] || [ "$1" == "--force" ]; then
+  if [ "$1" == "--force" ]; then
+    echo "Force updating pi-ware"
   else
-    echo "Pi-Ware is currently up-to-date."
-    sleep 2
-    exit 1
+    echo "Updating Pi-Ware..."
   fi
+  cd $HOME
+  rm -rf $HOME/pi-ware-pyqt5/
+  git clone "$PW_REPO" $HOME/pi-ware-pyqt5
+  rm -rf $PW_PREFIX/share/pi-ware-pyqt5/version
+  cd $HOME/pi-ware-pyqt5
+  echo $(git rev-parse main) > "$PW_PREFIX/share/pi-ware-pyqt5/version"
+  bash install
+  cd $HOME
+  echo "Update complete, Closing in 5 seconds..."
+  sleep 5
+  exit 0
 else
-  error "I couldn't detect an internet connection! Please re-connect and try again."
+  echo "Pi-Ware is currently up-to-date."
   sleep 2
   exit 1
 fi
