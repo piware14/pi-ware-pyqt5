@@ -96,7 +96,6 @@ class Tabs(QTabWidget):
       self.featuredTab = featuredTab(self)
       self.appsTab = appsTab(self)
       self.wikiTab = wikiTab(self)
-      self.DEVTab = DEVTab(self)
       self.addTab(self.featuredTab,"Featured")
       self.addTab(self.appsTab,"Apps")
       self.addTab(self.wikiTab,"Wiki")
@@ -118,6 +117,7 @@ class Tabs(QTabWidget):
             layout.addWidget(l2)
             widget.setLayout(layout)
             return widget
+            self.DEVTab = DEVTab(self)
             self.addTab(self.DEVTab,"Developer Information")
             print("App arcitectures:")
             print(archdata)
