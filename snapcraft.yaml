@@ -1,7 +1,7 @@
-name: pi-ware
-summary: A appstore for the Raspberry Pi.
+name: pi-ware-pyqt5
+summary: A appstore for the raspberry pi.
 description: |
-    A appstore for the Raspberry Pi.
+    A appstore for the raspberry pi.
 version: 1.0
 icon: icons/logo.png
 base: core18
