@@ -15,7 +15,7 @@ VER="1.4"
 AppName="Pi-Ware-Term"
 
 #load functions
-source "$HOME/pi-ware/func/api" || error "failed to source $HOME/pi-ware/func/api"
+source "$HOME/pi-ware-pyqt5/func/api" || echo "failed to source $HOME/pi-ware-pyqt5/func/api"
 
 #Main
 #Check if OG_Year and Year are the same.
@@ -28,11 +28,11 @@ else
 fi
 
 #Check if pi-ware is installed
-if [ ! -d "$HOME/pi-ware" ]; then
+if [ ! -d "$HOME/pi-ware-pyqt5" ]; then
   error "Pi-Ware needs to be installed to use this." exit
 fi
 
-# flags. default is to launch app.
+#flags. default is to launch app.
 if [[ "$1" == "--version" ]] || [[ "$1" == "-v" ]]; then
   echo -e "
   $(tput setaf 9)###############################################################
@@ -40,14 +40,14 @@ if [[ "$1" == "--version" ]] || [[ "$1" == "-v" ]]; then
   $(tput setaf 9)###############################################################$(tput sgr 0)
   "
   exit 0
-elif [[ "$1" == "--help" ]] || [[ "$1" == "-h" ]]; then
+elif [[ "$1" == "--help" ]]; then
   echo -e "
     $(tput setaf 6)$(tput bold)USAGE:$(tput sgr 0)
     $(tput bold)intended usage:$(tput sgr 0)
-    --install [AppName] | Install an app from pi-ware. 'pi-ware --install CryApp' installs CryApp to your system.
-    --uninstall [AppName] | Uninstalls an app from pi-ware. 'pi-ware --uninstall CryApp' uninstalls CryApp from your system.
+    --install [AppName] | Install an app from pi-ware. 'pi-ware-pyqt5 --install CryApp' installs CryApp to your system.
+    --uninstall [AppName] | Uninstalls an app from pi-ware. 'pi-ware-pyqt5 --uninstall CryApp' uninstalls CryApp from your system.
     --uninstall-all | Uninstalls pi-ware from your system completly.
-    --update | Checks if pi-ware is up-to-date, if you want to force update pi-ware run 'pi-ware --update force'.
+    --update | Checks if pi-ware is up-to-date, if you want to force update pi-ware run 'pi-ware-pyqt5 --update --force'.
     --apps | List all availible apps in pi-ware.
     $(tput setaf 6)$(tput bold)Extra commands that have no use:$(tput sgr 0)
     --version or -v | print version and exit.
@@ -59,6 +59,12 @@ elif [[ "$1" == "--author" ]]; then
   echo -e "$(tput setaf 6)$(tput bold)Author of $AppName:$(tput sgr 0) $OG_Creator"
   echo -e "$(tput setaf 6)$(tput bold)Author of Pi-Ware:$(tput sgr 0) ZachTheCoder14"
   exit 0
+elif [[ "$1" == "--apps" ]]; then
+  cd $HOME/pi-ware-pyqt5/apps
+  echo "Here are all the current apps"
+  ls
+  ls > $HOME/pi-ware-pyqt5/logs/current-apps
+  exit 0
 elif [[ "$1" == "--install" ]]; then
   if [[ "$2" != "" ]]; then
     echo -e "
@@ -68,10 +74,10 @@ elif [[ "$1" == "--install" ]]; then
     "
     echo "Installing $2"
     echo "To quit at any time press CTRL + C"
-    bash "$HOME/pi-ware/apps/$2/install"
+    bash "$HOME/pi-ware-pyqt5/apps/$2/install"
   else
     error "ERROR: AppName not provided."
-    echo "pi-ware --install AppName | for help run 'pi-ware --help'"
+    echo "pi-ware-pyqt5 --install AppName | for help run 'pi-ware-pyqt5 --help'"
   fi
 elif [[ "$1" == "--uninstall" ]]; then
   if [[ "$2" != "" ]]; then
@@ -82,10 +88,10 @@ elif [[ "$1" == "--uninstall" ]]; then
     "
     echo "Uninstalling $2"
     echo "To quit at any time press CTRL + C"
-    bash "$HOME/pi-ware/apps/$2/uninstall"
+    bash "$HOME/pi-ware-pyqt5/apps/$2/uninstall"
   else
     error "ERROR: AppName not provided."
-    echo "pi-ware --uninstall AppName | for help run 'pi-ware --help'"
+    echo "pi-ware-pyqt5 --uninstall AppName | for help run 'pi-ware-pyqt5 --help'"
   fi
 elif [[ "$1" == "--update" ]]; then
   echo -e "
@@ -93,15 +99,20 @@ elif [[ "$1" == "--update" ]]; then
   $(tput setaf 9)# $(tput setaf 4)$(tput bold)$AppName version $VER by $OG_Creator & The Pi-Ware-Team | $CopyYear $(tput sgr 0)$(tput setaf 9) #
   $(tput setaf 9)###############################################################$(tput sgr 0)
   "
-  echo "Checking for updates..."
-  bash "$HOME/pi-ware/updater"
+  if [[ "$2" == "--force" ]]; then
+    echo "Force updating Pi-Ware..."
+    bash "$HOME/pi-ware-pyqt5/updater '--force'"
+  else
+    echo "Checking for updates..."
+    bash "$HOME/pi-ware-pyqt5/updater"
+  fi
 elif [[ "$1" == "--uninstall-all" ]]; then
   echo "Uninstalling pi-ware from your system..."
-  bash $HOME/pi-ware/uninstall
-  rm -rf $HOME/.local/bin/pi-ware
+  bash $HOME/pi-ware-pyqt5/uninstall
+  rm -rf $HOME/.local/bin/pi-ware-pyqt5
   echo "Successfully uninstalled pi-ware from your system!"
 else
-  error "ERROR: $AppName requires a valid command! | for help run 'pi-ware --help'"
+  error "ERROR: $AppName requires a valid command! | for help run 'pi-ware-pyqt5 --help'"
   pi-ware --help
   exit 1
 fi
