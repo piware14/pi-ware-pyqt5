@@ -1,0 +1,29 @@
+#!/bin/bash
+
+#This file uploads a app telemetry file to http://pi-ware-telemetry.ml/
+
+#load functions and variables
+source "$HOME/pi-ware-pyqt5/func/api" || echo "failed to source $HOME/pi-ware-pyqt5/func/api"
+
+#Check if connected to internet
+while [[ "$(wget -q --spider http://google.com)" -eq 1 ]]
+do
+  echo "I couldn't detect an internet connection! Trying again..."
+  sleep 2
+done
+
+#If loop ends, User online
+#Check if user allowed telemetry
+if [ "$(cat '$HOME/.local/share/pi-ware-pyqt5/telemetry')" == "True" ]; then
+  echo "Telemetry allowed"
+  echo "Checking for telemetry file..."
+  if [ -f "$HOME/.local/share/pi-ware-pyqt5/telemetry/data-1.json" ]; then
+    echo "Sending file..."
+    curl -F "fileToUpload=@$HOME/.local/share/pi-ware-pyqt5/telemetry/data-1.json" http://pi-ware-telemetry.ml/uploader.php | echo "ERROR: I was unable to send the telemetry file."
+  else
+    error "ERROR: Unable to find '$HOME/.local/share/pi-ware-pyqt5/telemetry/data.json'\nA log has been generated in: '$HOME/pi-ware-pyqt5/logs/$logname'"
+  fi
+else
+  echo "Telemetry not allowed"
+  error "ERROR: Unable to send a telemetry file as user selected 'False' to send telemetry."
+fi
