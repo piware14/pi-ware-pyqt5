@@ -93,6 +93,7 @@ def DEVTab(parent):
     for app in apps:
         totalapps = totalapps+1
     print(totalapps)
+    l2.setText(f"{totalapps}")
     layout = QVBoxLayout(widget)
     layout.addWidget(l1)
     layout.addStretch()
