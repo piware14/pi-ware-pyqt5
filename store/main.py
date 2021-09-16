@@ -37,7 +37,9 @@ def istherefile(file): # This Function checks whether a file exists
 if istherefile(f"/home/{username}/pi-ware-pyqt5/.dev"):
     IsDev = "True"
 else:
-     IsDev = "False"
+    IsDev = "False"
+
+print(IsDev)
 
 def featuredTab(parent):
      widget = QWidget(parent)
