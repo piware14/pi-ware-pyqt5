@@ -39,9 +39,13 @@ if istherefile(f"/home/{username}/pi-ware-pyqt5/.dev"):
 else:
     IsDev = "False"
 
-print(f"/home/{username}/pi-ware-pyqt5/.dev")
-print(istherefile(f"/home/{username}/pi-ware-pyqt5/.dev"))
-print(IsDev)
+#Check if apps.json exists
+if not istherefile(f"/home/{username}/pi-ware/apps/apps.json"):
+    error("critical", "Apps.json not found!", True)
+else:
+     #Read apps.json
+     with open(f"/home/{username}/pi-ware/apps/apps.json") as f:
+       archdata = json.load(f)
 
 def featuredTab(parent):
      widget = QWidget(parent)
