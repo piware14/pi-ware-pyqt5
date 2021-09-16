@@ -39,6 +39,7 @@ if istherefile(f"/home/{username}/pi-ware-pyqt5/.dev"):
 else:
     IsDev = "True"
 
+print(f"/home/{username}/pi-ware-pyqt5/.dev")
 print(istherefile(f"/home/{username}/pi-ware-pyqt5/.dev"))
 print(IsDev)
 
