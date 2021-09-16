@@ -1,9 +1,9 @@
 #!/bin/bash
 
 #load functions
-source "$HOME/pi-ware/func/api" || echo "failed to source $HOME/pi-ware/func/api"
+source "$HOME/pi-ware-pyqt5/func/api" || echo "failed to source $HOME/pi-ware-pyqt5/func/api"
 
 echo "Your package manager is: $PackMang"
 echo "Installing $1"
-bash $HOME/pi-ware/apps/$1/install
+bash $HOME/pi-ware-pyqt5/apps/$1/install
 sleep 2
