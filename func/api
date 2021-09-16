@@ -1,5 +1,7 @@
 #Variables
-PW_PREFIX="$HOME/.local"
+PW_PREFIX="$HOME/.local/"
+PW_REPO="https://github.com/piware14/pi-ware-pyqt5.git"
+LAST_COMMIT="$(git ls-remote "$PW_REPO" | grep refs/heads/main | cut -f 1)"
 fwe="0"
 ers=""
 
@@ -17,4 +19,8 @@ function error {
 function warning {
   echo -e "\e[91m$2\e[39m"
   sleep "$1"
+}
+
+function packmang {
+  bash "$HOME/pi-ware/func/packagemang/mang $1 $2" > $HOME/pi-ware-pyqt5/logs/$todaydate-install.log
 }
