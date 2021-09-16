@@ -81,24 +81,6 @@ def wikiTab(parent):
      widget.setLayout(layout)
      return widget
 
-def DEVTab(parent):
-     widget = QWidget(parent)
-     l1 = QLabel()
-     l2 = QLabel()
-     l1.setFont(QFont('Arial', 30))
-     l1.setText("Total Apps:")
-     l1.setAlignment(Qt.AlignCenter)
-     apps = parseApps()
-     totalapps = 0
-     for app in apps:
-          totalapps = totalapps+1
-     layout = QVBoxLayout(widget)
-     layout.addWidget(l1)
-     layout.addStretch()
-     layout.addWidget(l2)
-     widget.setLayout(layout)
-     return widget
-
 class PiWare(QMainWindow):
      def __init__(self, x):
          super(PiWare, self).__init__()
@@ -119,9 +101,26 @@ class Tabs(QTabWidget):
       self.addTab(self.appsTab,"Apps")
       self.addTab(self.wikiTab,"Wiki")
       if IsDev == "True":
-          self.addTab(self.DEVTab,"Developer Information")
-          print("App arcitectures:")
-          print(archdata)
+          def DEVTab(parent):
+            widget = QWidget(parent)
+            l1 = QLabel()
+            l2 = QLabel()
+            l1.setFont(QFont('Arial', 30))
+            l1.setText("Total Apps:")
+            l1.setAlignment(Qt.AlignCenter)
+            apps = parseApps()
+            totalapps = 0
+            for app in apps:
+                totalapps = totalapps+1
+            layout = QVBoxLayout(widget)
+            layout.addWidget(l1)
+            layout.addStretch()
+            layout.addWidget(l2)
+            widget.setLayout(layout)
+            return widget
+            self.addTab(self.DEVTab,"Developer Information")
+            print("App arcitectures:")
+            print(archdata)
 
 class AppWindow(QWidget):
     def __init__(self, app: App):
