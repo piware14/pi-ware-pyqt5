@@ -83,8 +83,8 @@ def wikiTab(parent):
 
 def DEVTab(parent):
     widget = QWidget(parent)
-    l1 = QLabel(parent)
-    l2 = QLabel(parent)
+    l1 = QLabel()
+    l2 = QLabel()
     l1.setFont(QFont('Arial', 30))
     l1.setText("Total Apps:")
     l1.setAlignment(Qt.AlignCenter)
@@ -93,7 +93,7 @@ def DEVTab(parent):
     for app in apps:
         totalapps = totalapps+1
     print(totalapps)
-    l2.setText(f"{totalapps}")
+    l2.setText(f"1 {totalapps}")
     #l2.setAlignment(Qt.AlignCenter)
     layout = QVBoxLayout(widget)
     layout.addWidget(l1)
