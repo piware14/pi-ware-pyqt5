@@ -54,7 +54,7 @@ global username
 username = getpass.getuser()
 
 #Set window icon
-p1 = PhotoImage(file = f'/home/{username}/pi-ware/icons/logo.png')
+p1 = PhotoImage(file = f'/home/{username}/pi-ware-pyqt5/icons/logo.png')
 window.iconphoto(False, p1)
 
 #Main
@@ -63,7 +63,7 @@ window.geometry("320x500")
 window.eval('tk::PlaceWindow . center')
 window.title("Pi-Ware Settings")
 #Show latest news message
-NewsMessagefile = open(f"/home/{username}/pi-ware/func/info/settingsmessage", "r")
+NewsMessagefile = open(f"/home/{username}/pi-ware-pyqt5/func/info/settingsmessage", "r")
 NewsMessagecontent = NewsMessagefile.read()
 NewsMessage = tk.Label(window, text=NewsMessagecontent, font="Arial 9")
 NewsMessage.pack()
@@ -73,25 +73,25 @@ frame.pack(expand=True, fill="both")
 def show_desc(app):
     global install_script, uninstall_script, desc_win
     desc_win = tk.Toplevel(window)
-    p2 = PhotoImage(file = f'/home/{username}/pi-ware/icons/logo.png')
+    p2 = PhotoImage(file = f'/home/{username}/pi-ware-pyqt5/icons/logo.png')
     # Icon set for program window
     desc_win.iconphoto(False, p2)
     window.resizable(0, 0)
     desc_win.title(f"Change {app} settings")
     desc_win.geometry("350x500")
     window.withdraw()
-    desc = open(f"/home/{username}/pi-ware/func/settings/options/{app}/control", "r")
+    desc = open(f"/home/{username}/pi-ware-pyqt5/func/settings/options/{app}/control", "r")
     desc_contents = desc.read()
     app_desc = tk.Label(desc_win, text=desc_contents, font="Arial 9")
     app_desc.pack()
     #Set button title
-    button1optiontextfile = open(f"/home/{username}/pi-ware/func/settings/options/{app}/button1text", "r")
-    button2optiontextfile = open(f"/home/{username}/pi-ware/func/settings/options/{app}/button2text", "r")
+    button1optiontextfile = open(f"/home/{username}/pi-ware-pyqt5/func/settings/options/{app}/button1text", "r")
+    button2optiontextfile = open(f"/home/{username}/pi-ware-pyqt5/func/settings/options/{app}/button2text", "r")
     button1optiontext = button1optiontextfile.read()
     button2optiontext = button2optiontextfile.read()
     #Set button command
-    button1optioncommandfile = open(f"/home/{username}/pi-ware/func/settings/options/{app}/button1", "r")
-    button2optioncommandfile = open(f"/home/{username}/pi-ware/func/settings/options/{app}/button2", "r")
+    button1optioncommandfile = open(f"/home/{username}/pi-ware-pyqt5/func/settings/options/{app}/button1", "r")
+    button2optioncommandfile = open(f"/home/{username}/pi-ware-pyqt5/func/settings/options/{app}/button2", "r")
     button1option = button1optioncommandfile.read()
     button2option = button2optioncommandfile.read()
     #Set button
@@ -102,7 +102,7 @@ def show_desc(app):
     back_to_menu_button = tk.Button(desc_win, text="BACK", font="Arial 11 bold", width=200, height=2, bg="green", fg="white", command=back_to_menu)
     back_to_menu_button.pack(side = "bottom")
 
-ap = next(os.walk(f"/home/{username}/pi-ware/func/settings/options/"))[1]
+ap = next(os.walk(f"/home/{username}/pi-ware-pyqt5/func/settings/options/"))[1]
 applist = sorted(ap)
 print("Current settings:\n")
 for app in applist:
