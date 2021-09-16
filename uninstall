@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #load functions
-source "$HOME/pi-ware/func/api" || echo "failed to source $HOME/pi-ware/func/api"
+source "$HOME/pi-ware-pyqt5/func/api" || echo "failed to source $HOME/pi-ware-pyqt5/func/api"
 
 #Main
 echo "Uninstalling Pi-Ware"
@@ -10,19 +10,19 @@ echo "Removing Pi-Ware from terminal"
 rm -rf $HOME/.local/bin/pi-ware || error "Unable to remove $HOME/.local/bin/pi-ware"
 #Remove pi-ware desktop entry
 echo "Removing Pi-Ware from applications"
-rm -rf $HOME/.local/share/applications/pi-ware.desktop || error "Unable to remove $HOME/.local/share/applications/pi-ware.desktop"
+rm -rf $HOME/.local/share/applications/pi-ware-pyqt5.desktop || error "Unable to remove $HOME/.local/share/applications/pi-ware-pyqt5.desktop"
 #Remove pi-ware settings desktop entry
 echo "Removing Pi-Ware Settings from applications"
-rm -rf $HOME/.local/share/applications/pi-ware-settings.desktop || error "Unable to remove $HOME/.local/share/applications/pi-ware-settings.desktop"
+rm -rf $HOME/.local/share/applications/pi-ware-pyqt5-settings.desktop || error "Unable to remove $HOME/.local/share/applications/pi-ware-pyqt5-settings.desktop"
 #Remove pi-ware auto-updater
 echo "Removing Pi-Ware auto-updater"
-rm -rf $HOME/.config/autostart/update-pi-ware.desktop || error "Unable to remove $HOME/.config/autostart/update-pi-ware.desktop"
+rm -rf $HOME/.config/autostart/update-pi-ware-pyqt5.desktop || error "Unable to remove $HOME/.config/autostart/update-pi-ware-pyqt5.desktop"
 #Remove saved pi-ware info
 echo "Removing Pi-Ware updater files..."
-rm -rf $HOME/.local/share/pi-ware || error "Unable to remove $HOME/.local/share/pi-ware"
+rm -rf $HOME/.local/share/pi-ware-pyqt5 || error "Unable to remove $HOME/.local/share/pi-ware-pyqt5"
 #Remove Pi-Ware's folder
 echo "Removing Pi-Ware folder..."
-rm -rf $HOME/pi-ware || error "Unable to remove $HOME/pi-ware"
+rm -rf $HOME/pi-ware-pyqt5 || error "Unable to remove $HOME/pi-ware-pyqt5"
 
 #Inform user that the uninstall has finished
 #Check if finished with errors
@@ -30,7 +30,7 @@ if [ "${fwe}" == "1" ]; then
   echo "This script finished with errors, Here are the errors: ${ers}"
   exit 1
 elif [ "${fwe}" == "0" ]; then
-  echo "Successfully uninstalled pi-ware."
+  echo "Successfully uninstalled pi-ware-pyqt5"
   echo "Closing in 5 seconds."
   sleep 5s
   exit 0
