@@ -1,17 +1,20 @@
 #!/bin/bash
 
 #load functions
-source "$HOME/pi-ware/func/api" || error "failed to source $HOME/pi-ware/func/api"
+source "$HOME/pi-ware-pyqt5/func/api" || error "failed to source $HOME/pi-ware-pyqt5/func/api"
 
 #Main
 echo "Starting first use..."
-python3 $HOME/pi-ware/func/firstuse/setup.py
+python3 $HOME/pi-ware-pyqt5/func/firstuse/setup.py
 echo "Update pi-ware.desktop"
+echo "False" > "$PW_PREFIX/share/pi-ware-pyqt5/firstrun"
 echo "[Desktop Entry]
 Name=Pi-Ware
 Comment=Raspberry Pi app store
-Exec=python3 $HOME/pi-ware/store.py
-Icon=$HOME/pi-ware/icons/logo.png
+Exec=python3 $HOME/pi-ware-pyqt5/store/main.py
+Icon=$HOME/pi-ware-pyqt5/icons/logo.png
 Categories=Utility;
 Type=Application
-Terminal=false" > $HOME/.local/share/applications/pi-ware.desktop
+Terminal=false" > $HOME/.local/share/applications/pi-ware-pyqt5.desktop
+#Copy to desktop
+cp -r $HOME/.local/share/applications/pi-ware-pyqt5.desktop $HOME/Desktop/pi-ware-pyqt5.desktop
