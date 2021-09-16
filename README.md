@@ -34,7 +34,7 @@ To learn more vist our <a href="https://github.com/piware14/pi-ware/wiki/new-stu
 ## Install Pi-Ware
 ```sh
 git clone https://github.com/piware14/pi-ware-pyqt5.git
-cd pi-ware
+cd pi-ware-pyqt5
 bash install
 ```
 
@@ -43,12 +43,12 @@ Pi-Ware will automatically fetch and install updates, and tell you to restart it
 
 If you want to force update pi-ware, run
 ```sh
-bash $HOME/pi-ware/updater
+pi-ware-pyqt5 --update --force
 ```
 
 ## Uninstall Pi-Ware
 ```sh
-cd $HOME/pi-ware
+cd $HOME/pi-ware-pyqt5
 bash uninstall
 ```
 
