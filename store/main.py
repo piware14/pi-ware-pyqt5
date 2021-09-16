@@ -11,6 +11,7 @@ from PyQt5.QtNetwork import *
 
 import subprocess
 import os
+import sys
 import webbrowser
 from functools import partial
 import getpass
@@ -21,7 +22,6 @@ username = getpass.getuser()
 
 #Import custom  pi-ware functions
 from apps import *
-import sys
 
 #Developer check
 def istherefile(file): # This Function checks whether a file exists
