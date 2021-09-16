@@ -83,8 +83,8 @@ def wikiTab(parent):
 
 def DEVTab(parent):
     widget = QWidget(parent)
-    l1 = QLabel()
-    l2 = QLabel()
+    l1 = QLabel(parent)
+    l2 = QLabel(parent)
     l1.setFont(QFont('Arial', 30))
     l1.setText("Total Apps:")
     l1.setAlignment(Qt.AlignCenter)
