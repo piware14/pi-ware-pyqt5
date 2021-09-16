@@ -15,6 +15,15 @@ import webbrowser
 from functools import partial
 import getpass
 
+#Set global var username
+global username
+username = getpass.getuser()
+
+#Import custom  pi-ware functions
+from apps import *
+import sys
+
+#Developer check
 def istherefile(file): # This Function checks whether a file exists
     try:
         file_tst = open(file)
@@ -29,14 +38,6 @@ if istherefile(f"/home/{username}/pi-ware-pyqt5/.dev"):
     IsDev = "True"
 else:
      IsDev = "False"
-
-#Set global var username
-global username
-username = getpass.getuser()
-
-#Import custom  pi-ware functions
-from apps import *
-import sys
 
 def featuredTab(parent):
      widget = QWidget(parent)
