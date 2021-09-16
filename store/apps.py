@@ -28,5 +28,3 @@ def parseApps():
         applist.append(App(app[0], app[1]))
 
     return applist
-
-
