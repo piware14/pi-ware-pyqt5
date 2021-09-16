@@ -96,9 +96,9 @@ def DEVTab(parent):
     l2.setText(f"{totalapps}")
     l2.setAlignment(Qt.AlignCenter)
     layout = QVBoxLayout(widget)
-    layout.addWidget(l1)
-    layout.addStretch()
-    layout.addWidget(l2)
+    layout.addWidget(l1, 0, 1)
+    layout.addWidget(l2, 1, 1)
+    #layout.addWidget(l2)
     widget.setLayout(layout)
     return widget
 
