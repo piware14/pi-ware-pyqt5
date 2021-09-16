@@ -34,11 +34,12 @@ def istherefile(file): # This Function checks whether a file exists
         return True
 
 #Check if dev files exist
-if istherefile(f"/home/{username}/pi-ware-pyqt5/.dev"):
-    IsDev = "True"
-else:
+if not istherefile(f"/home/{username}/pi-ware-pyqt5/.dev"):
     IsDev = "False"
+else:
+    IsDev = "True"
 
+print(istherefile(f"/home/{username}/pi-ware-pyqt5/.dev"))
 print(IsDev)
 
 def featuredTab(parent):
