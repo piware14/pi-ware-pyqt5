@@ -6,14 +6,6 @@ source "$HOME/pi-ware-pyqt5/func/api" || echo "failed to source $HOME/pi-ware-py
 #Install python packages
 echo "Installing GUI dependencies..."
 sudo apt-get install qt5-default pyqt5-dev pyqt5-dev-tools python3-pyqt5.qtwebkit-dbg
-#wget https://www.riverbankcomputing.com/static/Downloads/sip/4.19.24/sip-4.19.24.tar.gz
-#tar -xzvf sip-4.19.24.tar.gz
-#cd sip-4.19.24
-#python configure.py
-#make
-#sudo rm sip-4.19.24
-#sudo rm sip-4.19.24.tar.gz
-#sudo pip3 install pyqt5
 
 #Main
 echo "Installing pi-ware..."
