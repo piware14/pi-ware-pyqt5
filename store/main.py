@@ -15,6 +15,21 @@ import webbrowser
 from functools import partial
 import getpass
 
+def istherefile(file): # This Function checks whether a file exists
+    try:
+        file_tst = open(file)
+        file_tst.close()
+    except FileNotFoundError:
+        return False
+    else:
+        return True
+
+#Check if dev files exist
+if istherefile(f"/home/{username}/pi-ware-pyqt5/.dev"):
+    IsDev = "True"
+else:
+     IsDev = "False"
+
 #Set global var username
 global username
 username = getpass.getuser()
@@ -65,6 +80,24 @@ def wikiTab(parent):
      widget.setLayout(layout)
      return widget
 
+def DEVTab(parent):
+     widget = QWidget(parent)
+     l1 = QLabel()
+     l2 = QLabel()
+     l1.setFont(QFont('Arial', 30))
+     l1.setText("Total Apps:")
+     l1.setAlignment(Qt.AlignCenter)
+     apps = parseApps()
+     totalapps = 0
+     for app in apps:
+          totalapps = totalapps+1
+     layout = QVBoxLayout(widget)
+     layout.addWidget(l1)
+     layout.addStretch()
+     layout.addWidget(l2)
+     widget.setLayout(layout)
+     return widget
+
 class PiWare(QMainWindow):
      def __init__(self, x):
          super(PiWare, self).__init__()
@@ -80,9 +113,14 @@ class Tabs(QTabWidget):
       self.featuredTab = featuredTab(self)
       self.appsTab = appsTab(self)
       self.wikiTab = wikiTab(self)
+      self.DEVTab = DEVTab(self)
       self.addTab(self.featuredTab,"Featured")
       self.addTab(self.appsTab,"Apps")
       self.addTab(self.wikiTab,"Wiki")
+      if IsDev == "True":
+          self.addTab(self.DEVTab,"Developer Information")
+          print("App arcitectures:")
+          print(archdata)
 
 class AppWindow(QWidget):
     def __init__(self, app: App):
