@@ -7,7 +7,7 @@ source "$HOME/pi-ware-pyqt5/func/api" || echo "failed to source $HOME/pi-ware-py
 echo "Uninstalling Pi-Ware"
 #Remove pi-ware utility
 echo "Removing Pi-Ware from terminal"
-rm -rf $HOME/.local/bin/pi-ware || error "Unable to remove $HOME/.local/bin/pi-ware"
+rm -rf $HOME/.local/bin/pi-ware-pyqt5 || error "Unable to remove $HOME/.local/bin/pi-ware-pyqt5"
 #Remove pi-ware desktop entry
 echo "Removing Pi-Ware from applications"
 rm -rf $HOME/.local/share/applications/pi-ware-pyqt5.desktop || error "Unable to remove $HOME/.local/share/applications/pi-ware-pyqt5.desktop"
