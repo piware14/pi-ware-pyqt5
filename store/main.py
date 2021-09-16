@@ -39,14 +39,6 @@ if istherefile(f"/home/{username}/pi-ware-pyqt5/.dev"):
 else:
     IsDev = "False"
 
-#Check if apps.json exists
-if not istherefile(f"/home/{username}/pi-ware-pyqt5/apps/apps.json"):
-    error("critical", "Apps.json not found!", True)
-else:
-     #Read apps.json
-     with open(f"/home/{username}/pi-ware-pyqt5/apps/apps.json") as f:
-       archdata = json.load(f)
-
 def featuredTab(parent):
      widget = QWidget(parent)
      layout = QVBoxLayout(widget)
@@ -100,6 +92,7 @@ def DEVTab(parent):
     totalapps = 0
     for app in apps:
         totalapps = totalapps+1
+    print(totalapps)
     layout = QVBoxLayout(widget)
     layout.addWidget(l1)
     layout.addStretch()
@@ -129,8 +122,6 @@ class Tabs(QTabWidget):
       #.tabs.removeTab(0)
       if IsDev == "True":
             self.addTab(self.DEVTab,"Developer Information")
-            print("App arcitectures:")
-            print(archdata)
 
 class AppWindow(QWidget):
     def __init__(self, app: App):
