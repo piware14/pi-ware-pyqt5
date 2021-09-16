@@ -92,9 +92,9 @@ def DEVTab(parent):
     totalapps = 0
     for app in apps:
         totalapps = totalapps+1
-    print(totalapps)
     l2.setText(f"1 {totalapps}")
     l2.setAlignment(Qt.AlignCenter)
+    l2.move(10, 20)
     layout = QVBoxLayout(widget)
     layout.addWidget(l1)
     layout.addWidget(l2)
