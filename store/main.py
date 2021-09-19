@@ -106,6 +106,7 @@ def DEVTab(parent):
     versiontext = QLabel(f'{pwver}')
     versiontext.setFont(QFont('Arial', 15))
     layout.addWidget(versiontext, 1, 1)
+    #Set layout
     widget.setLayout(layout)
     return widget
 
@@ -124,12 +125,12 @@ class Tabs(QTabWidget):
       self.featuredTab = featuredTab(self)
       self.appsTab = appsTab(self)
       self.wikiTab = wikiTab(self)
-      self.DEVTab = DEVTab(self)
       self.addTab(self.featuredTab,"Featured")
       self.addTab(self.appsTab,"Apps")
       self.addTab(self.wikiTab,"Wiki")
       if IsDev == "True":
-            self.addTab(self.DEVTab,"Developer Information")
+          self.DEVTab = DEVTab(self)
+          self.addTab(self.DEVTab,"Developer Information")
 
 class AppWindow(QWidget):
     def __init__(self, app: App):
