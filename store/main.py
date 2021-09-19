@@ -16,9 +16,13 @@ import webbrowser
 from functools import partial
 import getpass
 
-#Set global var username
+#Set global variables
 global username
 username = getpass.getuser()
+global pwversion
+with open(f'/home/{username}/.local/share/pi-ware-pyqt5/version') as f:
+    pwver = f.read()
+    f.close()
 
 #Import custom  pi-ware functions
 from apps import *
@@ -83,21 +87,25 @@ def wikiTab(parent):
 
 def DEVTab(parent):
     widget = QWidget(parent)
-    l1 = QLabel()
-    l2 = QLabel()
-    l1.setFont(QFont('Arial', 30))
-    l1.setText("Total Apps:")
-    l1.setAlignment(Qt.AlignCenter)
+    layout = QGridLayout(widget)
     apps = parseApps()
     totalapps = 0
     for app in apps:
         totalapps = totalapps+1
-    l2.setText(f"1 {totalapps}")
-    l2.setAlignment(Qt.AlignCenter)
-    l2.move(10, 20)
-    layout = QVBoxLayout(widget)
-    layout.addWidget(l1)
-    layout.addWidget(l2)
+    #Apps
+    Totalappstext = QLabel("Total Apps:")
+    Totalappstext.setFont(QFont('Arial', 30))
+    layout.addWidget(Totalappstext, 0, 0)
+    appcount = QLabel(f'{totalapps}')
+    appcount.setFont(QFont('Arial', 30))
+    layout.addWidget(appcount, 0, 1)
+    #Version
+    Versiontext = QLabel("Version:")
+    Versiontext.setFont(QFont('Arial', 30))
+    layout.addWidget(Versiontext, 1, 0)
+    versiontext = QLabel(f'{pwver}')
+    versiontext.setFont(QFont('Arial', 15))
+    layout.addWidget(versiontext, 1, 1)
     widget.setLayout(layout)
     return widget
 
@@ -120,13 +128,14 @@ class Tabs(QTabWidget):
       self.addTab(self.featuredTab,"Featured")
       self.addTab(self.appsTab,"Apps")
       self.addTab(self.wikiTab,"Wiki")
-      #.tabs.removeTab(0)
       if IsDev == "True":
             self.addTab(self.DEVTab,"Developer Information")
 
 class AppWindow(QWidget):
     def __init__(self, app: App):
         super().__init__()
+        self.setWindowIcon(QtGui.QIcon(f'{app.icon200}'))
+        self.setWindowTitle(f'{app.name}')
         layout = QGridLayout()
         self.install_script = app.install
         self.uninstall_script = app.uninstall
