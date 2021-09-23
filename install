@@ -3,6 +3,18 @@
 #load functions
 source "$HOME/pi-ware-pyqt5/func/api" || echo "failed to source $HOME/pi-ware-pyqt5/func/api"
 
+#Set aarch
+echo "Your aarch type is: $(uname -m)"
+if [ "$(uname -m)" == "armv7l" ]; then
+  echo "armv7l" > $HOME/.local/share/pi-ware-pyqt5/arch
+elif [ "$(uname -m)" == "aarch64" ]; then
+  echo "aarch64" > $HOME/.local/share/pi-ware-pyqt5/arch
+elif [ "$(uname -m)" == "x86_64" ]; then
+  error "Your arch is not supported, exiting install..." exit
+else
+  warning "2" "Unable to detect arch type! Continuing install..."
+fi
+
 #Install python packages
 echo "Installing GUI dependencies..."
 sudo apt-get install qt5-default pyqt5-dev pyqt5-dev-tools python3-pyqt5.qtwebkit-dbg
@@ -12,11 +24,18 @@ echo "Installing pi-ware..."
 mkdir -p $HOME/pi-ware-pyqt5/logs
 #Make required directory for updater
 mkdir -p "$PW_PREFIX/share/pi-ware-pyqt5"
+if [ -f "$PW_PREFIX/share/pi-ware-pyqt5/branch" ]; then
+  #echo $(git rev-parse --abbrev-ref HEAD) > "$PW_PREFIX/share/pi-ware-pyqt5/branch"
+  branch="$(cat $PW_PREFIX/share/pi-ware-pyqt5/branch)"
+else
+  branch="main"
+  echo $(git rev-parse --abbrev-ref HEAD) > "$PW_PREFIX/share/pi-ware-pyqt5/branch"
+fi
 echo $(git rev-parse main) > "$PW_PREFIX/share/pi-ware-pyqt5/version"
 echo "Creating a desktop entry for Pi-Ware..."
 mkdir -p $HOME/.local/share/applications
 echo "[Desktop Entry]
-Name=Pi-Ware
+Name=Pi-Ware-PYQT5
 Comment=Raspberry Pi app store
 Exec=python3 $HOME/pi-ware-pyqt5/store/main.py
 Icon=$HOME/pi-ware-pyqt5/icons/logo.png
@@ -28,7 +47,7 @@ cp -r $HOME/.local/share/applications/pi-ware-pyqt5.desktop $HOME/Desktop/pi-war
 #Settings button
 echo "Creating a settings desktop entry for Pi-Ware..."
 echo "[Desktop Entry]
-Name=Pi-Ware Settings
+Name=Pi-Ware-PYQT5 Settings
 Comment=Change some of pi-ware's settings
 Exec=python3 $HOME/pi-ware-pyqt5/func/settings/settings.py
 Icon=$HOME/pi-ware-pyqt5/icons/logo.png
@@ -38,8 +57,8 @@ Terminal=false" > $HOME/.local/share/applications/pi-ware-pyqt5-settings.desktop
 echo "Creating an auto updater for Pi-Ware..."
 mkdir -p $HOME/.config/autostart/
 echo "[Desktop Entry]
-Name=Pi-Ware-Auto-Updater
-Comment=Auto updater for pi-ware
+Name=Pi-Ware--PYQT5-Auto-Updater
+Comment=Auto updater for pi-ware-pyqt5
 Exec=bash $HOME/pi-ware-pyqt5/func/update/auto-update
 Icon=$HOME/pi-ware-pyqt5/icons/logo.png
 Categories=Utility;
@@ -52,15 +71,6 @@ sudo cp -r "$HOME/pi-ware-pyqt5/func/term/pi-ware-term" "/usr/local/bin/pi-ware-
 sudo chmod +x /usr/local/bin/pi-ware-pyqt5
 echo "Added pi-ware-commands to Terminal!"
 echo "Please restart terminal to apply changes."
-#Set aarch
-echo "Your aarch type is: $(uname -m)"
-if [ "$(uname -m)" == "armv7l" ]; then
-  echo "armv7l" > $HOME/.local/share/pi-ware-pyqt5/arch
-elif [ "$(uname -m)" == "aarch64" ]; then
-  echo "aarch64" > $HOME/.local/share/pi-ware-pyqt5/arch
-else
-  warning "2" "Unable to detect arch type! Continuing install..."
-fi
 #Set package manager
 if [ -f /usr/bin/apt ];then
   echo "Package manager is: apt"
