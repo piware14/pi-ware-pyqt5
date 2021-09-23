@@ -171,15 +171,15 @@ class AppWindow(QWidget):
         layout.addWidget(uninstallButton, 2, 1)
         self.setLayout(layout)
 
-    def install():
+    def install(self):
          if IsDev == "True":
-             print(f"bash /home/{username}/pi-ware/func/term/term-run {install_script}")
-         os.system(f"bash /home/{username}/pi-ware/func/term/term-run {install_script}")
+             print(f"bash /home/{username}/pi-ware/func/term/term-run {self.install_script}")
+         os.system(f"bash /home/{username}/pi-ware/func/term/term-run {self.install_script}")
 
-    def uninstall():
+    def uninstall(self):
         if IsDev == "True":
-            print(f"bash /home/{username}/pi-ware/func/term/term-run {uninstall_script}")
-        os.system(f"bash /home/{username}/pi-ware/func/term/term-run {uninstall_script}")
+            print(f"bash /home/{username}/pi-ware/func/term/term-run {self.uninstall_script}")
+        os.system(f"bash /home/{username}/pi-ware/func/term/term-run {self.uninstall_script}")
 
 if __name__ == '__main__':
      app = QApplication([])
