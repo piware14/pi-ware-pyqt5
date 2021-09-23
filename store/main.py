@@ -110,6 +110,18 @@ def DEVTab(parent):
     widget.setLayout(layout)
     return widget
 
+linkTemplate = '<a href={0}>{1}</a>'
+class HyperlinkLabel(QLabel):
+    def __init__(self, parent=None):
+        super().__init__()
+        self.setStyleSheet('font-size: 35px')
+        self.setOpenExternalLinks(True)
+        self.setParent(parent)
+
+#Link example:
+#label1 = HyperlinkLabel(self)
+#label1.setText(linkTemplate.format('https://Google.com', 'Google.com'
+
 class PiWare(QMainWindow):
      def __init__(self, x):
          super(PiWare, self).__init__()
@@ -160,10 +172,14 @@ class AppWindow(QWidget):
         self.setLayout(layout)
 
     def install(self):
-         subprocess.Popen(["bash", f"/home/{username}/pi-ware-pyqt5/func/term/term-run", str(self.install_script)])
+         if IsDev == "True":
+                print(f"bash /home/{username}/pi-ware/func/term/term-run {install_script}")
+         os.system(f"bash /home/{username}/pi-ware/func/term/term-run {install_script}")
 
     def uninstall(self):
-        subprocess.Popen(["bash", f"/home/{username}/pi-ware-pyqt5/func/term/term-run", str(self.uninstall_script)])
+        if IsDev == "True":
+                print(f"bash /home/{username}/pi-ware/func/term/term-run {uninstall_script}")
+         os.system(f"bash /home/{username}/pi-ware/func/term/term-run {uninstall_script}")
 
 if __name__ == '__main__':
      app = QApplication([])
