@@ -179,7 +179,7 @@ class AppWindow(QWidget):
     def uninstall():
         if IsDev == "True":
             print(f"bash /home/{username}/pi-ware/func/term/term-run {uninstall_script}")
-         os.system(f"bash /home/{username}/pi-ware/func/term/term-run {uninstall_script}")
+        os.system(f"bash /home/{username}/pi-ware/func/term/term-run {uninstall_script}")
 
 if __name__ == '__main__':
      app = QApplication([])
