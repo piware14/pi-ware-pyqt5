@@ -2,8 +2,7 @@
 #Pi-Ware text editor
 
 import sys
-from PyQt5.QtWidgets import QWidget, QApplication, QVBoxLayout, QHBoxLayout
-from PyQt5.QtWidgets import QTextEdit, QLabel, QShortcut, QFileDialog, QMessageBox
+from PyQt5.QtWidgets import QWidget, QApplication, QVBoxLayout, QHBoxLayout, QTextEdit, QLabel, QShortcut, QFileDialog, QMessageBox
 from PyQt5.QtGui import QKeySequence
 from PyQt5 import Qt
 
