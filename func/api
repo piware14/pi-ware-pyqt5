@@ -1,8 +1,11 @@
 #Variables
 todaydate="$(date +"%A,%B,%d,%Y")"
-PW_PREFIX="$HOME/.local/"
+LOCAL="$HOME/.local/"
+PW_PREFIX="$HOME/.local/share/pi-ware-pyqt5"
 PW_REPO="https://github.com/piware14/pi-ware-pyqt5.git"
 LAST_COMMIT="$(git ls-remote "$PW_REPO" | grep refs/heads/main | cut -f 1)"
+
+#Error handling
 fwe="0"
 ers=""
 
